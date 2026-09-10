@@ -1,0 +1,117 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: light;
+  --surface: #ffffff;
+  --sidebar: #f9f9f9;
+  --elevated: #ffffff;
+  --subtle: #f3f3f3;
+  --hover: #ececec;
+  --line: #e3e3e3;
+  --ink: #0d0d0d;
+  --ink-muted: #6b6b6b;
+}
+
+.dark {
+  color-scheme: dark;
+  --surface: #212121;
+  --sidebar: #181818;
+  --elevated: #2b2b2b;
+  --subtle: #303030;
+  --hover: #2e2e2e;
+  --line: #3a3a3a;
+  --ink: #ececec;
+  --ink-muted: #a1a1a1;
+}
+
+@theme inline {
+  --color-surface: var(--surface);
+  --color-sidebar: var(--sidebar);
+  --color-elevated: var(--elevated);
+  --color-subtle: var(--subtle);
+  --color-hover: var(--hover);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- markdown ---------- */
+
+.markdown {
+  --tw-prose-body: var(--ink);
+  --tw-prose-headings: var(--ink);
+  --tw-prose-lead: var(--ink);
+  --tw-prose-links: var(--ink);
+  --tw-prose-bold: var(--ink);
+  --tw-prose-counters: var(--ink-muted);
+  --tw-prose-bullets: var(--ink-muted);
+  --tw-prose-hr: var(--line);
+  --tw-prose-quotes: var(--ink);
+  --tw-prose-quote-borders: var(--line);
+  --tw-prose-captions: var(--ink-muted);
+  --tw-prose-code: var(--ink);
+  --tw-prose-th-borders: var(--line);
+  --tw-prose-td-borders: var(--line);
+  line-height: 1.7;
+}
+
+.markdown :where(code):not(:where(pre *))::before,
+.markdown :where(code):not(:where(pre *))::after {
+  content: none;
+}
+
+.markdown :where(code):not(:where(pre *)) {
+  background: var(--subtle);
+  border-radius: 0.375rem;
+  padding: 0.15em 0.35em;
+  font-size: 0.875em;
+  font-weight: 500;
+}
+
+.markdown .hljs {
+  background: transparent;
+  padding: 0;
+}
+
+/* Pulsing dot after the last rendered block while a reply streams. */
+.streaming-cursor > :last-child::after {
+  content: "";
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  margin-left: 0.3em;
+  border-radius: 9999px;
+  background: currentColor;
+  vertical-align: middle;
+  animation: pulse-dot 1s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
